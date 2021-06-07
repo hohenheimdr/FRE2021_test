@@ -1,0 +1,20 @@
+<!---->
+<launch>
+	<node pkg="mode_control" type="mode_control_toggle" name="mode_control_task1" output="screen">
+			
+			<param name="mode_sub" value="/actual_mode"/>
+			<param name="mode_pub" value="/new_mode"/>
+		
+			<param name="headland_detected_front" value="/headland_detected"/>
+			<param name="headland_detected_back" value="/headland_detected_back"/>	
+
+			<param name="obstacle_detected" value="no_obstacles_in_this_task"/>
+			<param name="movement_finished" value="/movement_finished"/>
+			<param name="frequency" value="10"/>
+			<param name="mode_change_duration" value="5.0"/>
+			<param name="start_pattern" value="1"/> <!--first turn left-->
+						
+		</node>
+
+
+</launch>

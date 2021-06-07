@@ -1,0 +1,33 @@
+<!---->
+<launch>
+<!-- always start joystick with motorcontroller for user input! -->
+<group ns="motorcontrollers">	
+	<!--front motorcontroller-->
+		<node pkg="motorcontroller" type="sdc2130_core" name="sdc2130" respawn="true" >
+			<param name="toggle_ch1" value="false"/>				<!--Richtung ändern ch1--> 
+			<param name="toggle_ch2" value="true"/>				<!--Richtung ändern ch2--> 
+			<param name="port" value="/dev/ttyACM0"/>
+			<param name="deadzone" value="0.2"/>
+			<param name="speed_sub" value="/cmd_vel" />
+			<param name="max_controller_command" value="1000" />	<!--im node nicht vorhanden-->
+			<param name="max_acceleration" value="50000"/>  
+			<param name="max_decceleration" value="50000"/> 
+			<param name="vel_max" value="1.0"/>
+			<param name="angle_max" value="1.0"/> 					<!--ohne Bedeutung-->
+			<param name="output_max" value="1000"/>					<!--???-->
+			<param name="output_offset_left" value="125"/>
+			<param name="output_offset_right" value="125"/>
+			<param name="P" value="1.02"/>
+			<param name="I" value="0.5"/>
+			<param name="D" value="0.25"/>
+			<param name="Pang" value="0.3"/>
+			<param name="Iang" value="0.005"/>
+			<param name="Dang" value="0.01"/>
+			<param name="closed_loop" value="false"/>				<!--PID-Regler an-/abschalten-->
+			<param name="odometry_sub" value="/odometry_front"/>
+			<param name="distance_center_to_wheel" value="1.0"/>	<!--Einheit??-->
+		</node>	
+	</group>
+
+
+</launch>

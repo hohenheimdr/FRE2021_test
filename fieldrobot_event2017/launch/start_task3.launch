@@ -1,0 +1,22 @@
+<!--starting the basic functions and sensors of the robot -->
+<launch>
+	<!--start row follower-->
+	<include file="$(find fieldrobot_event2017)/launch/start_row_follower.launch"/>
+	<!--start the start point follower-->
+	<include file="$(find fieldrobot_event2017)/launch/start_point_follower.launch"/>
+	<!--start also the mode control think about first turn!-->
+	<include file="$(find mode_control)/launch/start_mode_controler_task3.launch"/>
+	<!--start also the camera-->
+	<include file="$(find usb_cam)/launch/usb_cam_fieldrobot_event.launch"/>
+	<!--start also the the software for the ball detection-->
+	<include file="$(find ball_detection)/launch/start_image_detector.launch"/>
+	<!--start also the the software for the ball detection-->
+	<include file="$(find ball_detection)/launch/start_image_detector_tennisball.launch"/>
+	<!--include the mapping later!-->
+	<include file="$(find usb_relais)/launch/start_nozzles.launch"/>
+	<!--include the mapping later!-->
+	<include file="$(find fieldrobot_event2017)/launch/start_ball_mapping.launch"/>
+	<!--include the mapping later!-->
+	
+	
+</launch>

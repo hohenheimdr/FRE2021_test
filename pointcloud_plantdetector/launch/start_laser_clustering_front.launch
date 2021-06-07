@@ -1,0 +1,124 @@
+<!---->
+<launch>
+
+<param name="use_sim_time" value="true"/>
+
+<node pkg="tf" type="static_transform_publisher" name="tf_laser_front_new" args="0.32 0.0 0.18 0.611 0.0 0.0 base_link laser_front 50"/>
+
+
+  <!-- apply cloud filter for front scan for assembling-->
+	<node pkg="laser_filters" type="scan_to_cloud_filter_chain" name="lasercloud_filter">
+		<remap from="scan" to="/lms1xx_front/scan" />
+		<rosparam command="load" file="$(find pointcloud_plantdetector)/launch/box_filter.yaml" />
+		<param name="change_tf" value="true" />
+		<param name="frame_id" value="laser_front"/>
+		<param name="target_frame" value="base_link"/>
+		<param name="high_fidelity" value="true" />
+	</node>
+
+<!--start 3d plant detector-->	
+	<node pkg="pointcloud_plantdetector" type="3D_plant_detector" name="plant_filter_left">
+		<param name="cloud_in" value="/cloud_filtered" />
+		<param name="frame_id" value="base_link" />
+		<param name="filtered_cloud" value="/cloud_after_filtering_left" />
+		<!--<param name="cloud_points" value="/cloudpoints_left" />-->
+		<param name="plants_pub" value="/clusterpoints_left" />
+		<param name="use_box_filter" value="true" />
+		<param name="x_min" value="-0.7" />
+		<param name="y_min" value="-0.3" />
+		<param name="z_min" value="-1" />
+		<param name="x_max" value="1.8" />
+		<param name="y_max" value="1.5" />
+		<param name="z_max" value="1" />
+
+		<param name="ransac_dist" value="0.05" />
+		<param name="radius" value="0.11" />
+		<param name="neighbour_nr" value="30" />
+		<param name="distance" value="0.02" />
+		<param name="minClusterSize" value="10" />
+		<param name="remove_plane" value="false" />
+	</node>
+
+<node pkg="pointcloud_plantdetector" type="3D_plant_detector" name="plant_filter_right">
+		<param name="cloud_in" value="/cloud_filtered" />
+		<param name="frame_id" value="base_link" />
+		<param name="filtered_cloud" value="/cloud_after_filtering_right" />
+		<!--<param name="cloud_points" value="/cloudpoints_right" />-->
+		<param name="plants_pub" value="/clusterpoints_right" />
+		<param name="use_box_filter" value="true" />
+		<param name="x_min" value="-0.7" />
+		<param name="y_min" value="-1.5" />
+		<param name="z_min" value="-1" />
+		<param name="x_max" value="1.8" />
+		<param name="y_max" value="0.3" />
+		<param name="z_max" value="1" />	
+		<param name="ransac_dist" value="0.05" />
+		<param name="radius" value="0.11" />
+		<param name="neighbour_nr" value="30" />
+		<param name="distance" value="0.02" />
+		<param name="minClusterSize" value="10" />
+		<param name="remove_plane" value="false" />
+	</node>
+
+<!-- RANSAC: Erstellung von Geradengleichung und Pose zur Reihenerkennung -->
+ <node pkg="laser_row_detection" type="ransac_line_generator" name="line_generator_left" >
+    <param name="cloud_in" value="/clusterpoints_left"/><!--/cloud_cluster_centers_left-->
+    <param name="row_out" value="/line_pose_left"/>  
+    <param name="point_out" value="/point_left"/>    
+    <param name="frame_id" value="/base_link"/>
+    <param name="mean_value" value="10"/>
+    <param name="iterations" value="1000"/>
+    <param name="add_points" value="0"/>
+    <param name="distance" value="0.01"/>
+    <param name="left_row" value="true"/>
+    
+  </node>
+  
+  <node pkg="laser_row_detection" type="ransac_line_generator" name="line_generator_right" >
+    <param name="cloud_in" value="/clusterpoints_right"/>
+    <param name="row_out" value="/line_pose_right"/>  
+    <param name="point_out" value="/point_right"/>    
+    <param name="frame_id" value="/base_link"/>
+    <param name="mean_value" value="10"/>
+    <param name="iterations" value="1000"/>
+    <param name="add_points" value="0"/>
+    <param name="distance" value="0.01"/>
+    <param name="right_row" value="true"/>
+
+  </node>
+
+<!-- Ermittlung des Korrekturwertes zur Navigation zwischen zwei Pflanzenreihen -->
+##get out a speed value
+ <node pkg="laser_row_detection" type="tf_row_publisher"  output="screen" name="cmdvel_laser_correction">
+    <param name="pose_right" value="/line_pose_right"/>
+    <param name="pose_left" value="/line_pose_left"/>
+    <param name="tf_name" value="row_point"/>
+    <param name="frequency" value="10"/>
+    <param name="offset_x" value="0.0"/>
+    <param name="offset_y" value="0.0"/>
+    <param name="headland_out" value="/headland_detected"/>
+  </node>
+
+<node pkg="basic_navigation" name="row_point_follower" type="point_follower" >
+		    <param name="cmd_vel_topic_id" value="/cmd_vel_row"/>
+		    <param name="rabbit_frame_id" value="row_point"/>
+		    <param name="vehicle_frame_id" value="base_link"/>
+		    <param name="goal_reached" value="/movement_finished"/>
+		   ##variables floor indoors... need a change for outdoor conditions
+		    <param name="dist_offset" value="0.05"/>
+		    <param name="angle_offset" value="0.15"/>
+ 		    <param name="angle_thresh" value="0.02"/>
+		    <param name="time_offset" value="0.1"/>
+		    <param name="linear_offset" value="0.03"/>
+		    <param name="dist_thresh" value="0.1"/>
+		    <param name="speed_max" value="0.7"/>
+		    <param name="angle_speed_max" value="1.7"/>
+		    <param name="P" value="1.0"/>
+		    <param name="I" value="0.1"/>
+		    <param name="D" value="2.0"/>
+		  
+	</node>
+
+
+
+</launch>

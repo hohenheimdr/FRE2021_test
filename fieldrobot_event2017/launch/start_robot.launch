@@ -1,0 +1,18 @@
+<!--starting the basic functions and sensors of the robot -->
+<launch>
+
+	<!--start laserscanners with overlay of the positions-->
+	<include file="$(find sick_tim)/launch/start_laserscanners.launch"/>
+	<!--start also the footprint filter directly-->
+	<include file="$(find laser_filters)/launch/start_base_filter_lasers.launch"/>
+	<!--start joystick-->
+	<include file="$(find gamepad)/launch/start_joystick.launch"/>
+	<!--start imu-->
+	<include file="$(find vectornav_vn100)/launch/start_imu.launch"/>
+	<!-- start motorcontrollers (always with overlay of joystick controll -->
+	<include file="$(find motorcontroller)/launch/start_motorcontrollers.launch"/>
+	<!-- start mode changer to define what signal to use -->
+	<include file="$(find mode_changer)/launch/start_mode_changer.launch"/>	
+	<!--start local positioning with odometry and imu input-->
+	<include file="$(find odometry)/launch/start_odometry.launch"/>
+</launch>

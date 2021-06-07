@@ -1,0 +1,19 @@
+<!---->
+<launch>
+	<node pkg="mode_control" type="mode_control_task3" name="mode_control_task3" >
+			
+			<param name="mode_sub" value="/actual_mode"/>
+			<param name="mode_pub" value="/new_mode"/>
+		
+			<param name="headland_detected_front" value="/headland_detected"/>
+			<param name="headland_detected_back" value="/not_used"/>	
+
+			<param name="obstacle_detected" value="/obstacle_detected"/>
+			<param name="movement_finished" value="/movement_finished"/>
+			<param name="frequency" value="5"/>
+			<param name="mode_change_duration" value="1"/>
+						
+		</node>
+
+
+</launch>

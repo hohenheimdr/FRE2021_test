@@ -1,0 +1,12 @@
+<!---->
+<launch>
+<!--check the laser pointcloud for emergency stops and give back how to turn at the place--> 
+	<node pkg="laser_security" type="laser_security_twist" name="laser_security_static_new" output="screen">
+		<param name="source_front" value="/front_cloud_security"/>
+		<param name="cmd_vel_sub" value="/cmd_vel_static"/>
+		<param name="cmd_vel_pub" value="/cmd_vel_static_filtered"/>		
+		<param name="front_distance_min" value="0.4"/>
+		<param name="back_distance_min" value="0.3"/>
+	</node>
+
+</launch>

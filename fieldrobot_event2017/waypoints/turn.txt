@@ -1,0 +1,5 @@
+# this is a comment for first testing
+# x,	    y,	z, waittime, roll,    pitch,	yaw
+0.2,	 0.0,  0.0,	0.1,	0.0,	0.0,	1.56,
+0.2,	 0.0,  0.0,	0.1,	0.0,	0.0,	1.56,
+0.2,	 0.0,  0.0,	0.1,	0.0,	0.0,	3.1415,

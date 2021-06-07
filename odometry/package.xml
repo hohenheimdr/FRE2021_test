@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>odometry</name>
+  <version>0.0.0</version>
+  <description>The odometry package</description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag --> 
+  <!-- Example:  -->
+  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
+  <maintainer email="hp@todo.todo">hp</maintainer>
+
+  <license>whatever</license>
+
+ <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>driver_base</build_depend>
+<build_depend>move_base_msgs</build_depend>
+  
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>driver_base</run_depend>
+  <run_depend>msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+
+  <export>
+  </export>
+</package>

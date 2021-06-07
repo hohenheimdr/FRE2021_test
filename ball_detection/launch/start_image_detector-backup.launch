@@ -1,0 +1,20 @@
+<!---->
+<launch>
+  
+	<node pkg="ball_detection" type="ball_detection" name="ball_detector" output="screen">
+		<param name="image_raw" value="/usb_cam/image_raw"/>
+		<param name="image_out1" value="/test1"/>
+		<param name="image_out2" value="/test2"/>
+		<param name="minRad" value="10" />
+		<param name="maxRad" value="150" />
+		<param name="CamHight" value="0.65" />
+		<param name="CamAoV" value="200.0" />
+		<param name="CalibAreaCornerX" value="275" />
+		<param name="CalibAreaHight" value="36" />
+		<param name="CalibAreaWidth" value="42" />
+		
+	</node>
+	
+	
+
+</launch>

@@ -1,0 +1,32 @@
+<!---->
+<launch>
+  
+	<node pkg="ball_detection" type="ball_detection" name="golf_ball_detector" output="screen">
+		<param name="image_raw" value="/usb_cam/image_raw"/>
+		<param name="image_out1" value="/test1"/>
+		<param name="image_out2" value="/test2"/>
+		<param name="minRad" value="20" />
+		<param name="maxRad" value="30" />
+		<param name="CamHight" value="0.66" />
+		<param name="CamAoV" value="40" />
+		<param name="CalibAreaX" value="353" />
+		<param name="CalibAreaY" value="440" />
+		<param name="CalibAreaHight" value="23" />
+		<param name="CalibAreaWidth" value="24" />
+		<param name="DetectionAreaHight" value="400" />
+		<param name="minKnownTime" value="0" />
+		<param name="HoughGradient" value="1" />
+		<param name="HoughCanny" value="200" />
+		<param name="HoughCenter" value="100" />
+		<param name="GaussianSigmaX" value="10" />
+		<param name="GaussianSigmaY" value="10" />
+		<param name="GaussianSize" value="5" />
+		<param name="Areas_Hight" value="/250" />
+		<param name="balldetect_out" value="/Golfball" />
+		<param name="ballInAreaL_out" value="/left_sprayer" />
+		<param name="ballInAreaM_out" value="/middle_sprayer" />
+		<param name="ballInAreaR_out" value="/right_sprayer" />
+
+	</node>
+
+</launch>

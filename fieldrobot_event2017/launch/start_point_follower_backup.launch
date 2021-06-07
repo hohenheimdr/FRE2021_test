@@ -1,0 +1,36 @@
+<!---->
+<launch>
+<node pkg="basic_navigation" name="point_follower" type="point_follower" output="screen">
+		    <param name="cmd_vel_topic_id" value="/cmd_vel_headland"/>
+		    <param name="rabbit_frame_id" value="headland_point"/>
+		    <param name="vehicle_frame_id" value="base_link"/>
+		    <param name="goal_reached" value="/movement_finished"/>
+		   ##variables floor indoors... need a change for outdoor condition
+
+ 		   
+		###defines when the algorithm tries to change the angle difference
+ 		    <param name="angle_react_thresh" value="0.05"/>
+		## start angle when the vehicle starts moving... to not get a extreme turn....
+		    <param name="start_moving_angle" value="0.2"/>
+		## when goal is not reachable for 0.2 seconds skip goal
+		    <param name="time_offset" value="0.15"/>
+		
+		 ###distance acceptable for goalpoint
+		<param name="dist_thresh" value="0.15"/>
+		###biggest acceptable error for angle difference
+ 		<param name="angle_thresh" value="0.15"/>
+		 
+		<param name="speed_min" value="0.25"/>	
+ 		### what value always should get started with... (start moving condition) 0,45
+		<param name="angle_speed_min" value="0.75"/>	
+		<param name="speed_max" value="0.5"/>	<!--0.7-->
+		<param name="angle_speed_max" value="1.5"/>		<!--2.0-->
+		<param name="use_PID_for_turn" value="true"/>
+		<param name="P" value="1.0"/>
+		<param name="I" value="0.0"/>
+		<param name="D" value="0.0"/>
+		<param name="max_integral" value="0"/>
+		<param name="allow_backwards" value="false"/> 
+	</node>
+
+</launch>

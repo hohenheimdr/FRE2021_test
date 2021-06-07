@@ -1,0 +1,51 @@
+<!---->
+<launch>
+
+	<node pkg="mode_changer" type="mode_changer_twist" name="mode_changer" output="screen" >
+			
+			<param name="cmd_vel_joy" value="/cmd_vel_joy"/>
+			<param name="cmd_vel_headland" value="/cmd_vel_headland"/>
+			<param name="cmd_vel_static" value="/cmd_vel_static"/>
+			<param name="cmd_vel_row" value="/cmd_vel_row"/>
+			<param name="cmd_vel_obstacle" value="/cmd_vel_row_backwards"/>
+			<param name="deadzone" value="10.0"/>
+			<param name="cmd_vel_pub" value="/cmd_vel"/>
+			<param name="mode_sub" value="/new_mode"/>
+			<param name="mode_pub" value="/actual_mode"/>
+			
+			<param name="mode_change_duration" value="2"/>
+		
+			<param name="row_button" value="/joy/button_A"/>
+			<param name="obstacle_button" value="/joy/button_B"/>
+			<param name="static_button" value="/joy/button_X"/>
+			<param name="headland_button" value="/joy/button_Y"/>
+			<param name="odom_reset" value="/odom_set"/>
+			<param name="distance_sub" value="/goal"/>
+			
+		</node>
+<!--
+<node pkg="laser_security" type="laser_security" name="laser_security_joy" >
+		<param name="source_front" value="/front_cloud_security"/>
+		<param name="cmd_vel_sub" value="/cmd_vel_joy"/>
+		<param name="cmd_vel_pub" value="/cmd_vel_joy_filtered"/>		
+		<param name="front_distance_min" value="0.45"/>
+		
+	</node>
+
+	<node pkg="laser_security" type="laser_security_twist" name="laser_security_static">
+		<param name="source_front" value="/front_cloud_security"/>
+		<param name="cmd_vel_sub" value="/cmd_vel_static"/>
+		<param name="cmd_vel_pub" value="/cmd_vel_static_filtered"/>		
+		<param name="front_distance_min" value="0.35"/>
+		
+	</node>
+
+<node pkg="laser_security" type="laser_security_twist" name="laser_security_node_headland" output= "screen" >
+		<param name="source_front" value="/front_cloud_security"/>
+		<param name="cmd_vel_sub" value="/cmd_vel_headland"/>
+		<param name="cmd_vel_pub" value="/cmd_vel_headland_filtered"/>		
+		<param name="front_distance_min" value="0.35"/>
+		
+	</node>-->
+
+</launch>

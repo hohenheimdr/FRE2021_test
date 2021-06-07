@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>mode_changer</name>
+  <version>0.0.0</version>
+  <description>The mode_changer package</description>
+
+ <maintainer email="dreiser@uni-hohenheim.org">UniH</maintainer>
+  <license>whatever</license>
+ 
+ <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+<build_depend>move_base_msgs</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+<run_depend>msgs</run_depend>
+
+  <export>
+  </export>
+</package>

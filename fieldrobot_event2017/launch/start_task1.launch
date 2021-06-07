@@ -1,0 +1,12 @@
+<!--starting the basic functions and sensors of the robot -->
+<launch>
+
+	<!--start row follower-->
+	<include file="$(find fieldrobot_event2017)/launch/start_row_follower.launch"/>
+	<!--start the start point follower-->
+	<include file="$(find fieldrobot_event2017)/launch/start_point_follower.launch"/>
+	<!--start also the mode control think about first turn!-->
+	<include file="$(find mode_control)/launch/start_mode_controler_task1.launch"/>
+	
+	
+</launch>
