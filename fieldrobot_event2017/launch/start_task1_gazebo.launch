@@ -1,8 +1,7 @@
 <!--starting the basic functions and sensors of the robot -->
 <launch>
 	<param name="use_sim_time" value="true"/>
-	<!--publish /joy/button_A to get robot control to row mode!-->
-	<node pkg="fieldrobot_event2017" type="start_topics.sh" name="joytopic_start"/>
+	
 
 	<include file="$(find mode_changer)/launch/start_mode_changer.launch"/>	
 	<!--start row follower-->
@@ -11,6 +10,9 @@
 	<include file="$(find fieldrobot_event2017)/launch/start_point_follower.launch"/>
 	<!--start also the mode control think about first turn!-->
 	<include file="$(find mode_control)/launch/start_mode_controler_task1.launch"/>
+	
+	<!--publish /joy/button_A to get robot control to row mode!-->
+	<node pkg="fieldrobot_event2017" type="start_topics.sh" name="joytopic_start"/>
 	
 	
 </launch>
